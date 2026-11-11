@@ -1,0 +1,17 @@
+{
+  "name": "smartgreen-vision-rice",
+  "private": true,
+  "version": "1.0.0",
+  "description": "สมาร์ทกรีน Vision Ai วิเคราะห์ใบข้าว — ตรวจธาตุอาหาร โรค และแมลงข้าวด้วย AI",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check public/js/app.js && node --input-type=module -e \"import('./lib/riceService.js')\""
+  },
+  "dependencies": {
+    "@google/genai": "^2.31.0",
+    "dotenv": "^17.3.1"
+  }
+}
