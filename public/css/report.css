@@ -229,3 +229,12 @@ body { margin: 0; font-family: 'Prompt', -apple-system, BlinkMacSystemFont, 'Seg
   .fp, .sg-i { padding: 6px 8px; }
   .rf { margin-top: 10px; padding-top: 6px; }
 }
+
+/* Leaf greenness bar in the report */
+.dg-green { margin-top: 6px; }
+.lcc-bar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+.lcc-seg { border-radius: 6px; padding: 4px 1px; text-align: center; color: #fff; font-size: 8.5px; font-weight: 700; line-height: 1.15; text-shadow: 0 1px 2px rgba(0,0,0,.8); border: 2px solid transparent; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.lcc-seg b { display: block; font-size: 12px; }
+.lcc-seg.s1 { background: #c9b83f; } .lcc-seg.s2 { background: #82a72e; } .lcc-seg.s3 { background: #388831; }
+.lcc-seg.s4 { background: #1b6426; } .lcc-seg.s5 { background: #0d3d16; }
+.lcc-seg.on { border-color: #0f172a; box-shadow: 0 0 0 2px #fde047; }

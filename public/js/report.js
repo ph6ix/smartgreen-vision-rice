@@ -23,6 +23,7 @@
     'ขาดรุนแรง': { pct: 15, cls: 'bad' },
     'ต้องตรวจเพิ่ม': { pct: 50, cls: 'na' },
   };
+  const GREEN_LEVELS = ['ซีด/เหลือง', 'เขียวอ่อน', 'เขียวปกติ', 'เขียวสมบูรณ์', 'เขียวเข้มจัด'];
   const HEALTH_LEVELS = [
     { min: 0, label: 'วิกฤต' }, { min: 20, label: 'ต้องแก้ไขด่วน' }, { min: 40, label: 'ต้องดูแล' },
     { min: 60, label: 'ค่อนข้างดี' }, { min: 80, label: 'สมบูรณ์ดี' },
@@ -200,6 +201,9 @@
           <div class="dg-head"><span>สุขภาพต้นข้าว</span><b class="dg-lvl">ระดับ ${lvl + 1} / 5</b></div>
           <div class="gauge" role="img" aria-label="ระดับสุขภาพ ${lvl + 1} จาก 5">${gauge}</div>
           <div class="dg-score">${esc(HEALTH_LEVELS[lvl].label)}</div>
+          ${r.greennessLevel >= 1 && r.greennessLevel <= 5 ? `
+          <div class="dg-head dg-green"><span>ความเขียวของใบ</span><b class="dg-lvl">ระดับ ${r.greennessLevel} / 5</b></div>
+          <div class="lcc-bar">${GREEN_LEVELS.map((l, i) => `<div class="lcc-seg s${i + 1}${i + 1 === Number(r.greennessLevel) ? ' on' : ''}"><b>${i + 1}</b><span>${esc(l)}</span></div>`).join('')}</div>` : ''}
         </div>
       </section>
 
@@ -239,8 +243,9 @@
     const lines = [
       '🌾 ผลตรวจใบข้าว (สมาร์ทกรีน Vision Ai)',
       r.customerName ? `แปลง: ${r.customerName}` : '',
-      r.plantAge ? `อายุ: ${r.plantAge} ปี` : '',
+      r.plantAge ? `อายุ: ${r.plantAge} วัน` : '',
       `สุขภาพต้น: ${HEALTH_LEVELS[healthLevel(Number(r.healthScore) || 0)].label}`,
+      r.greennessLevel ? `ความเขียวของใบ: ระดับ ${r.greennessLevel}/5 (${GREEN_LEVELS[r.greennessLevel - 1]})` : '',
       `ปัญหาหลัก: ${r.primaryIssue}`,
       '',
       '🧪 ธาตุที่ควรดูแล:',

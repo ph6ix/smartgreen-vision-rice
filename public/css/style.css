@@ -517,3 +517,21 @@ button { -webkit-tap-highlight-color: transparent; }
 .az-checklist li.active .az-ck { border: none; font-size: 18px; animation: spin 2s linear infinite; }
 .az-checklist li.active .az-ck::after { content: '⚙️'; }
 @media (prefers-reduced-motion: reduce) { .az-checklist li.active .az-ck { animation: none; } }
+
+/* Leaf greenness bar (Leaf Color Chart, like the sugarcane app) */
+.lcc-box { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+.lcc-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 13.5px; font-weight: 700; }
+.lcc-head b { color: #a7f3d0; font-weight: 800; }
+.lcc-badge { background: rgba(255,255,255,.2); border: 1px solid rgba(255,255,255,.35); font-size: 12px; font-weight: 800; padding: 3px 12px; border-radius: 999px; }
+.lcc-bar { display: flex; gap: 6px; background: #022c19; border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 12px 10px; }
+.lcc-seg { flex: 1; min-height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 9px; border: 2px solid transparent; color: #fff; font-size: 10.5px; font-weight: 700; line-height: 1.2; text-align: center; text-shadow: 0 1px 3px rgba(0,0,0,.9); position: relative; padding: 4px 2px; }
+.lcc-seg b { font-size: 15px; font-weight: 800; line-height: 1; margin-bottom: 3px; }
+.lcc-seg.s1 { background: linear-gradient(180deg, #d8ca52, #b8a62c); }
+.lcc-seg.s2 { background: linear-gradient(180deg, #94ba38, #6e9424); }
+.lcc-seg.s3 { background: linear-gradient(180deg, #44983c, #2b7725); }
+.lcc-seg.s4 { background: linear-gradient(180deg, #22732e, #13551d); }
+.lcc-seg.s5 { background: linear-gradient(180deg, #134e1e, #062c0e); }
+.lcc-seg.on { border: 2.5px solid #fff; box-shadow: 0 0 14px rgba(255,255,255,.95); transform: translateY(-2px) scale(1.03); z-index: 1; }
+.lcc-seg.on::after { content: '▲'; position: absolute; top: -14px; font-size: 13px; }
+.lcc-note { font-size: 13.5px; line-height: 1.55; background: rgba(0,0,0,.32); border: 1px solid rgba(255,255,255,.2); border-radius: 12px; padding: 10px 14px; }
+@media print { .lcc-seg { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }

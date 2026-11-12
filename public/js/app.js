@@ -59,6 +59,8 @@
     'ต้องตรวจเพิ่ม': { pct: 50, color: '#94a3b8', cls: '' },
   };
   const LIKELIHOOD_CLS = { 'สูง': 'bad', 'ปานกลาง': 'warn', 'ต่ำ': '' };
+  // Leaf greenness (Leaf Color Chart, 5 levels — same scale as the sugarcane app)
+  const GREEN_LEVELS = ['ซีด/เหลือง', 'เขียวอ่อน', 'เขียวปกติ', 'เขียวสมบูรณ์', 'เขียวเข้มจัด'];
   const HEALTH_LEVELS = [
     { min: 0, label: 'วิกฤต' }, { min: 20, label: 'ต้องแก้ไขด่วน' }, { min: 40, label: 'ต้องดูแล' },
     { min: 60, label: 'ค่อนข้างดี' }, { min: 80, label: 'สมบูรณ์ดี' },
@@ -579,6 +581,7 @@
         <div class="pc-issue">${esc(r.primaryIssue)}</div>
         <div class="pc-score-label">🌾 สุขภาพต้น: <b>${esc(HEALTH_LEVELS[lvl].label)}</b></div>
         <div class="gauge" role="img" aria-label="ระดับสุขภาพ ${lvl + 1} จาก 5">${gauge}</div>
+        ${greenHtml(r)}
         ${photos ? `<div class="pc-photos">${photos}</div>` : ''}
       </section>
       ${urgent}
@@ -603,6 +606,7 @@
       r.plantAge ? `อายุ: ${r.plantAge} วัน` : '',
       r.plantingSeason ? `ฤดู / วิธีปลูก: ${r.plantingSeason}` : '',
       `สุขภาพต้น: ${HEALTH_LEVELS[healthLevel(Number(r.healthScore) || 0)].label}`,
+      r.greennessLevel ? `ความเขียวของใบ: ระดับ ${r.greennessLevel}/5 (${GREEN_LEVELS[r.greennessLevel - 1]})` : '',
       `ปัญหาหลัก: ${r.primaryIssue}`,
       '',
       '🧪 ธาตุที่ควรดูแล:',
@@ -629,6 +633,19 @@
     const text = buildShareText(lastResult);
     try { await navigator.clipboard.writeText(text); setSaveStatus('📋 คัดลอกผลตรวจแล้ว กำลังเปิด LINE...'); } catch {}
     window.open('https://line.me/R/share?text=' + encodeURIComponent(text), '_blank', 'noopener');
+  }
+
+  // Greenness bar (like the sugarcane app): yellow -> dark green, current level outlined
+  function greenHtml(r) {
+    const g = Number(r.greennessLevel);
+    if (!(g >= 1 && g <= 5)) return '';
+    const segs = GREEN_LEVELS.map((l, i) => `<div class="lcc-seg s${i + 1}${i + 1 === g ? ' on' : ''}"><b>${i + 1}</b>${esc(l)}</div>`).join('');
+    return `
+        <div class="lcc-box">
+          <div class="lcc-head"><span>🌿 ระดับความเขียวของใบ: <b>ระดับ ${g}: ${esc(GREEN_LEVELS[g - 1])}</b></span><span class="lcc-badge">ระดับ ${g} / 5</span></div>
+          <div class="lcc-bar" role="img" aria-label="ระดับความเขียวของใบ ${g} จาก 5">${segs}</div>
+          ${r.greennessNote ? `<div class="lcc-note">${esc(r.greennessNote)}</div>` : ''}
+        </div>`;
   }
 
   // ---------------------------------------------------------------- A4 report page
