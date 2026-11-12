@@ -686,6 +686,7 @@
   // ---------------------------------------------------------------- Google Sheets
   function buildSheetEntry(r) {
     return {
+      crop: 'rice',
       timestamp: r.analyzedAt || new Date().toISOString(),
       traceId: r.traceId || '',
       isDemo: r.isDemo ? 'true' : '',
@@ -703,6 +704,8 @@
       lastFertilizer: r.lastFertilizer || '',
       observedSymptoms: (r.observedSymptoms || []).join(', '),
       healthScore: r.healthScore,
+      greennessLevel: r.greennessLevel || '',
+      greennessNote: r.greennessNote || '',
       primaryIssue: r.primaryIssue || '',
       nutrientSummary: (r.nutrientStatus || []).filter((n) => n.status !== 'ปกติ').map((n) => `${n.code}: ${n.status}`).join(', ') || 'ปกติทุกธาตุ',
       diseaseSummary: (r.diseases || []).map((d) => `${d.name} (โอกาส${d.likelihood})`).join(', ') || 'ไม่พบ',
