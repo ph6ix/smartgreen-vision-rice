@@ -535,3 +535,10 @@ button { -webkit-tap-highlight-color: transparent; }
 .lcc-seg.on::after { content: '▲'; position: absolute; top: -14px; font-size: 13px; }
 .lcc-note { font-size: 13.5px; line-height: 1.55; background: rgba(0,0,0,.32); border: 1px solid rgba(255,255,255,.2); border-radius: 12px; padding: 10px 14px; }
 @media print { .lcc-seg { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+
+/* Photo tips for accurate leaf colour (greenness level) */
+.color-tip { margin-top: 12px; background: #fffbeb; border: 1.5px solid #fde68a; border-radius: 14px; padding: 10px 14px; }
+.color-tip-head { font-weight: 700; color: #92400e; font-size: 13.5px; }
+.color-tip-head small { font-weight: 600; color: #b45309; font-size: 11.5px; }
+.color-tip ul { margin: 6px 0 0; padding-left: 1.1rem; font-size: 12.5px; color: var(--s700); line-height: 1.6; }
+.color-tip b { color: #92400e; }
