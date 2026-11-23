@@ -613,8 +613,6 @@
           <span class="pc-pill">ผลตรวจสมบูรณ์ (AI Confirmed)${r.isDemo ? ' · DEMO' : ''}</span>
         </div>
         <div class="pc-issue">${esc(r.primaryIssue)}</div>
-        <div class="pc-score-label">🌾 สุขภาพต้น: <b>${esc(HEALTH_LEVELS[lvl].label)}</b></div>
-        <div class="gauge" role="img" aria-label="ระดับสุขภาพ ${lvl + 1} จาก 5">${gauge}</div>
         ${greenHtml(r)}
         ${photos ? `<div class="pc-photos">${photos}</div>` : ''}
       </section>
@@ -639,7 +637,6 @@
       r.customerName ? `แปลง: ${r.customerName}` : '',
       r.plantAge ? `อายุ: ${r.plantAge} วัน` : '',
       r.plantingSeason ? `ฤดู / วิธีปลูก: ${r.plantingSeason}` : '',
-      `สุขภาพต้น: ${HEALTH_LEVELS[healthLevel(Number(r.healthScore) || 0)].label}`,
       r.greennessLevel ? `ความเขียวของใบ: ระดับ ${r.greennessLevel}/5 (${GREEN_LEVELS[r.greennessLevel - 1]})` : '',
       `ปัญหาหลัก: ${r.primaryIssue}`,
       '',

@@ -198,11 +198,8 @@
           <small>ความมั่นใจของ AI: ${dash(r.confidence)}</small>
         </div>
         <div class="dx-gauge">
-          <div class="dg-head"><span>สุขภาพต้นข้าว</span><b class="dg-lvl">ระดับ ${lvl + 1} / 5</b></div>
-          <div class="gauge" role="img" aria-label="ระดับสุขภาพ ${lvl + 1} จาก 5">${gauge}</div>
-          <div class="dg-score">${esc(HEALTH_LEVELS[lvl].label)}</div>
           ${r.greennessLevel >= 1 && r.greennessLevel <= 5 ? `
-          <div class="dg-head dg-green"><span>ความเขียวของใบ</span><b class="dg-lvl">ระดับ ${r.greennessLevel} / 5</b></div>
+          <div class="dg-head"><span>ความเขียวของใบ</span><b class="dg-lvl">ระดับ ${r.greennessLevel} / 5</b></div>
           <div class="lcc-bar">${GREEN_LEVELS.map((l, i) => `<div class="lcc-seg s${i + 1}${i + 1 === Number(r.greennessLevel) ? ' on' : ''}"><b>${i + 1}</b><span>${esc(l)}</span></div>`).join('')}</div>` : ''}
         </div>
       </section>
@@ -244,7 +241,6 @@
       '🌾 ผลตรวจใบข้าว (สมาร์ทกรีน Vision Ai)',
       r.customerName ? `แปลง: ${r.customerName}` : '',
       r.plantAge ? `อายุ: ${r.plantAge} วัน` : '',
-      `สุขภาพต้น: ${HEALTH_LEVELS[healthLevel(Number(r.healthScore) || 0)].label}`,
       r.greennessLevel ? `ความเขียวของใบ: ระดับ ${r.greennessLevel}/5 (${GREEN_LEVELS[r.greennessLevel - 1]})` : '',
       `ปัญหาหลัก: ${r.primaryIssue}`,
       '',
